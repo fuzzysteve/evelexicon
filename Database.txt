@@ -1,0 +1,42 @@
+CREATE TABLE lexiconterm (
+    id serial,
+    userid integer,
+    term character varying(200),
+    status integer DEFAULT 0
+);
+
+CREATE TABLE lexicontermdefinition (
+    id serial,
+    userid integer,
+    lexiconterm integer,
+    definition text,
+    status integer
+);
+
+
+CREATE TABLE lexicontod (
+    id serial,
+    tod date,
+    lexiconterm integer
+);
+
+CREATE TABLE lexiconuser (
+    id integer NOT NULL,
+    userid integer,
+    username character varying(200)
+);
+
+ALTER TABLE ONLY lexiconterm
+    ADD CONSTRAINT lexiconterm_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY lexicontermdefinition
+    ADD CONSTRAINT lexicontermdefinition_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY lexicontod
+    ADD CONSTRAINT lexicontod_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY lexiconuser
+    ADD CONSTRAINT lexiconuser_pkey PRIMARY KEY (id);
+
+CREATE INDEX lu_uid ON lexiconuser USING btree (userid);
+

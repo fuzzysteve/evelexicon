@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Eve Lexicon - {block name=title}{/block}</title>
+    <title>EVE Lexicon - {block name=title}{/block}</title>
     <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
     <link href="{$baseurl}css/main.css" rel="stylesheet" type="text/css"/>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -50,7 +50,7 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="{$baseurl}/">
-                        Eve Lexicon
+                        EVE Lexicon
                     </a>
                 </li>
                 <li>
@@ -82,6 +82,9 @@
 
             </ul>
         </div>
+        <div class=floaty>
+            <i class="glyphicon glyphicon-cog glyphicon-lg" id="togglemenu"></i>
+        </div>
 <!-- /#sidebar-wrapper -->
 
 
@@ -90,14 +93,20 @@
 <div id="page-content-wrapper">
 <div class="container-fluid">
 {block name=body}{/block}
-</div>
 <div id="footer">
-<div class="container">
+<div class="row">
 EVE Online and the EVE logo are the registered trademarks of CCP hf. All rights are reserved worldwide. All other trademarks are the property of their respective owners. EVE Online, the EVE logo, EVE and all associated logos and designs are the intellectual property of CCP hf. All artwork, screenshots, characters, vehicles, storylines, world facts or other recognizable features of the intellectual property relating to these trademarks are likewise the intellectual property of CCP hf. CCP hf. has granted permission to fuzzwork.co.uk to use EVE Online and all associated logos and designs for promotional and information purposes on its website but does not endorse, and is not in any way affiliated with, fuzzwork.co.uk. CCP is in no way responsible for the content on or functioning of this website, nor can it be liable for any damage arising from the use of this website.
+</div>
 </div>
 </div>
 </div>
 
 <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+<script>
+    $("#togglemenu").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+</script>
 </body>
 </html>

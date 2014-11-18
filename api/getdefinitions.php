@@ -43,4 +43,4 @@ while ($row=$todstmt->fetchObject()) {
         "userid"=>$row->userid
     );
 }
-echo json_encode(array("term"=>$term,"definitions"=>$terms), JSON_NUMERIC_CHECK);
+echo json_encode(array("term"=>$term,"id"=>$id,"definitions"=>$terms), JSON_NUMERIC_CHECK);

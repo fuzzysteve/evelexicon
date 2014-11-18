@@ -8,3 +8,5 @@
 .vertical-center {   min-height: 100%; display: flex; align-items: center; }
 .scrollable {height: 100%; overflow: scroll;}
 .padding5 {padding-left:5px;padding-right:5px}
+.loaddefinition {cursor:pointer;}
+.glyphicon-lg {font-size: 1.2em;}

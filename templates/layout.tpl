@@ -1,5 +1,6 @@
 <html>
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
     <title>EVE Lexicon - {block name=title}{/block}</title>
     <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
     <link href="{$baseurl}css/main.css" rel="stylesheet" type="text/css"/>

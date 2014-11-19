@@ -32,4 +32,4 @@ while ($row=$termstmt->fetchObject()) {
 
 $smarty->assign('terms', $terms, true);
 
-$smarty->display('list.tpl');
+$smarty->display('list2.tpl');

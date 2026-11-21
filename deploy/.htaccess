@@ -1,0 +1,2 @@
+# Deployment files (Apache vhost etc.) live in the repo but must never be served.
+Require all denied

@@ -5,9 +5,12 @@ require_once '../includes/dbpost.inc.php';
 
 
 $termnamesql=<<<EOS
-SELECT term,id
-FROM lexiconterm
-where status>=:status
+SELECT term,id FROM (
+    SELECT DISTINCT ON (lower(term)) term,id
+    FROM lexiconterm
+    where status>=:status
+    order by lower(term), id
+) t
 order by term asc
 EOS;
 

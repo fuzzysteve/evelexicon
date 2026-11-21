@@ -7,13 +7,13 @@ $nonce=substr(base64_encode(hash(
 )), 0, 12);
 
 
-if ($nonce != $_POST['nonce']) {
-    error_log("non matching nonce".$_POST['nonce']);
+if (!isset($_SESSION['auth_characterid']) || !hash_equals($nonce, (string)($_POST['nonce'] ?? ''))) {
+    http_response_code(403);
     exit;
 }
 
-$term=substr(strip_tags($_POST['term']), 0, 150);
-$definition=substr(strip_tags($_POST['definition']), 0, 4000);
+$term=substr(strip_tags((string)($_POST['term'] ?? '')), 0, 150);
+$definition=substr(strip_tags((string)($_POST['definition'] ?? '')), 0, 4000);
 if (strlen($term)==0) {
     error_log("blank term");
     exit;
@@ -87,4 +87,4 @@ $defininitionstmt=$dbh->prepare($definitionsql);
 $defininitionstmt->execute(array(":userid"=>$_SESSION['auth_characterid'],":id"=>$id,":definition"=>$definition));
 
 
-header('Location: /list.php?id='.$id);
+header('Location: /list.php?id='.(int)$id);

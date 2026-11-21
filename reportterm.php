@@ -7,12 +7,15 @@ $nonce=substr(base64_encode(hash(
 )), 0, 12);
 
 
-if ($nonce != $_GET['nonce']) {
-    error_log("non matching nonce".$_POST['nonce']);
+if (!isset($_SESSION['auth_characterid']) || !hash_equals($nonce, (string)($_GET['nonce'] ?? ''))) {
+    http_response_code(403);
     exit;
 }
 
-$id=is_numeric($_GET['id'])?$_GET['id']:0;
+$id=filter_var($_GET['id'] ?? null, FILTER_VALIDATE_INT, ['options'=>['min_range'=>1]]);
+if (!$id) {
+    exit;
+}
 
 $definitionsql=<<<EOS
 insert into lexiconreport (lexicontermdefinitionid,userid) values (:id,:userid)

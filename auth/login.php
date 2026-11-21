@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['auth_characterid'])) {
-    echo "Logged in. ".$_SESSION['auth_characterid'];
+    echo "Logged in. ".(int)$_SESSION['auth_characterid'];
     exit;
 } else {
     //Throw login redirect.

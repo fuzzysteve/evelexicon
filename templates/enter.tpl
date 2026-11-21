@@ -7,7 +7,7 @@
 <div class="entryForm">
 <p>If you try to re-add a term, you will just add a new definition to it</p>
 <form action="/addterm.php" method="post">
-<input type=hidden value="{$nonce}" id='nonce' name='nonce'>
+<input type=hidden value="{$nonce|escape}" id='nonce' name='nonce'>
 <table class="inputtable">
 <tr><th><label for="term">Term</label></th><td><input type=text maxlength=100 size=100 name="term" id="term"></td></tr>
 <tr><th><label for="definition">Definition</label></th><td><textarea cols=200 name="definition" id="definition"></textarea></td></tr>

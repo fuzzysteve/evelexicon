@@ -4,9 +4,9 @@
 <div class="container">
 <div id="about">
 <h1>Report Definition</h1>
-<p>{$term.definition}</p>
+<p>{$term.definition|escape|nl2br}</p>
 <p>Are you sure you want to report this term?</p>
-<a href="/reportterm.php?id={$term.id}&nonce={$nonce}" class="btn btn-primary btn-lg">Report</a>
+<a href="/reportterm.php?id={$term.id}&amp;nonce={$nonce|escape:'url'}" class="btn btn-primary btn-lg">Report</a>
 </div>
 </div>
 <div class="tsandcs">

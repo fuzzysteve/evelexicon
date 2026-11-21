@@ -4,15 +4,18 @@ $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 
 
 if (isset($_SESSION['auth_characterid'])) {
-    $smarty->assign('characterid', $_SESSION['auth_characterid'], true);
+    $smarty->assign('characterid', (int)$_SESSION['auth_characterid'], true);
 } else {
     $smarty->assign('characterid', 0, true);
 }
 
 $termnamesql=<<<EOS
-SELECT term,id
-FROM lexiconterm
-where status>=:status
+SELECT term,id FROM (
+    SELECT DISTINCT ON (lower(term)) term,id
+    FROM lexiconterm
+    where status>=:status
+    order by lower(term), id
+) t
 order by term asc
 EOS;
 

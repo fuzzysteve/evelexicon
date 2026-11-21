@@ -15,15 +15,11 @@ if (isset($_SESSION['auth_state']) and isset($_GET['state']) and $_SESSION['auth
     $url='https://login.eveonline.com/v2/oauth/token';
 #    $verify_url='https://login.eveonline.com/oauth/verify';
     $header='Authorization: Basic '.base64_encode($clientid.':'.$secret);
-    $fields_string='';
     $fields=array(
                 'grant_type' => 'authorization_code',
                 'code' => $code
             );
-    foreach ($fields as $key => $value) {
-        $fields_string .= $key.'='.$value.'&';
-    }
-    rtrim($fields_string, '&');
+    $fields_string=http_build_query($fields);
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_USERAGENT, $useragent);
@@ -67,7 +63,7 @@ if (isset($_SESSION['auth_state']) and isset($_GET['state']) and $_SESSION['auth
 $jwtexplode=json_decode(base64_decode(str_replace('_', '/', str_replace('-','+',explode('.',$auth_token )[1]))));
 $charactername=$jwtexplode->name;
 $owner=$jwtexplode->owner;
-$characterid=explode(":",$jwtexplode->sub)[2];
+$characterid=(int)explode(":",$jwtexplode->sub)[2];
 
 // Lookup the character details in the DB.
     require_once('db.inc.php');
@@ -216,7 +212,6 @@ $characterid=explode(":",$jwtexplode->sub)[2];
     exit;
 
 } else {
+    http_response_code(400);
     echo "State is wrong. Did you make sure to actually hit the login url first?";
-    error_log($_SESSION['auth_state']);
-    error_log($_GET['state']);
 }

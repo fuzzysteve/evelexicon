@@ -4,13 +4,16 @@ session_start();
 require_once '../includes/dbpost.inc.php';
 
 
-$search=strtolower(substr(strip_tags($_GET['search']), 0, 150));
+$search=strtolower(substr(strip_tags((string)($_GET['search'] ?? '')), 0, 150));
 
 $termnamesql=<<<EOS
-SELECT term,id
-FROM lexiconterm
-where status>=:status
-and lower(term) like :search
+SELECT term,id FROM (
+    SELECT DISTINCT ON (lower(term)) term,id
+    FROM lexiconterm
+    where status>=:status
+    and lower(term) like :search
+    order by lower(term), id
+) t
 order by term asc
 EOS;
 
@@ -26,9 +29,9 @@ $terms=array();
 while ($row=$termstmt->fetchObject()) {
     $terms[]=array(
         "term"=>$row->term,
-        "id"=>$row->id,
+        "id"=>(int)$row->id,
     );
 }
 
 
-echo json_encode($terms, JSON_NUMERIC_CHECK);
+echo json_encode($terms);

@@ -3,11 +3,11 @@ require_once 'includes/header.php';
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 
 
-$id=is_numeric($_GET['id'])?$_GET['id']:1;
+$id=filter_var($_GET['id'] ?? null, FILTER_VALIDATE_INT, ['options'=>['min_range'=>1]]) ?: 1;
 
 
 if (isset($_SESSION['auth_characterid'])) {
-    $smarty->assign('characterid', $_SESSION['auth_characterid'], true);
+    $smarty->assign('characterid', (int)$_SESSION['auth_characterid'], true);
 } else {
     $smarty->assign('characterid', 0, true);
 }
@@ -30,6 +30,10 @@ $todstmt->execute(array(":term"=>$id));
 $terms=array();
 
 $row=$todstmt->fetchObject();
+if (!$row) {
+    header('Location: /list.php');
+    exit;
+}
 $term=array(
         "id"=>$row->id,
         "definition"=>$row->definition,

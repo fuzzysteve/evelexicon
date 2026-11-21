@@ -3,9 +3,12 @@ require_once 'includes/header.php';
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 
 $termnamesql=<<<EOS
-SELECT term,id
-FROM lexiconterm
-where status>=:status
+SELECT term,id FROM (
+    SELECT DISTINCT ON (lower(term)) term,id
+    FROM lexiconterm
+    where status>=:status
+    order by lower(term), id
+) t
 order by term asc
 EOS;
 

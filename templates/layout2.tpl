@@ -2,31 +2,17 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
     <title>EVE Lexicon - {block name=title}{/block}</title>
-    <link href="{$baseurl}css/main.css" rel="stylesheet" type="text/css"/>
+    <link href="{$baseurl}css/main.css?v=20261121d" rel="stylesheet" type="text/css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 {block name=extrajavascript}{/block}
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <script src="js/jquery.scrollto.js"></script>
+    <script src="/js/jquery.scrollto.js"></script>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="../../assets/js/html5shiv.js"></script>
-      <script src="../../assets/js/respond.min.js"></script>
-    <![endif]-->
-    <style>
-    {literal}
-    html, body{
-        height:100%;
-        margin:0;
-        padding:0;
-    }
-    {/literal}
-    </style>
 </head>
 <body {block name=bodyattributes}{/block}>
 <div class="container-fluid">
@@ -53,7 +39,7 @@
                 <ul class="nav navbar-nav navbar-right">
 {if ($characterid>0)}
                 <li>
-                    <a href="/auth/logout.php"><img src='https://image.eveonline.com/Character/{$characterid}_32.jpg'></a>
+                    <a href="/auth/logout.php"><img src='https://images.evetech.net/characters/{$characterid|escape}/portrait?size=32'></a>
                 </li>
 {else}
                 <li>

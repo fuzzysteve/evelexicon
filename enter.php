@@ -9,7 +9,7 @@ if (isset($_SESSION['auth_characterid'])) {
 
 $nonce=substr(base64_encode(hash(
     "md5",
-    $_SESSION['auth_state'].$nonce_secret.$_SESSION['auth_characterid']
+    ($_SESSION['auth_state'] ?? '').$nonce_secret.($_SESSION['auth_characterid'] ?? '')
 )), 0, 12);
 $smarty->assign('nonce', $nonce, true);
 

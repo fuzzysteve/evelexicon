@@ -48,6 +48,7 @@
 {if ($characterid>0)}
                 <li><form action="{$baseurl}/enter.php"><button class="btn btn-default navbar-btn">Add Term</button></form></li>
 {/if}
+                        <li><a href="{$baseurl}/about.php">About</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
 {if ($characterid>0)}

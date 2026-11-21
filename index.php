@@ -12,7 +12,7 @@ FROM lexiconterm
 join lexicontod on lexicontod.lexiconterm=lexiconterm.id
 join lexicontermdefinition on lexiconterm.id=lexicontermdefinition.lexiconterm
 join lexiconuser on lexicontermdefinition.userid=lexiconuser.userid
-where lexicontod.tod between current_date-5 and current_date
+where lexicontod.tod between current_date-3 and current_date
 order by tod desc
 EOS;
 

@@ -1,4 +1,4 @@
-{extends file='layout.tpl' }
+{extends file='layout2.tpl' }
 {block name=title}Add Term{/block}
 {block name=body}
 {if ($characterid==0)}

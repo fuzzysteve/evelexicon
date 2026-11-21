@@ -2,9 +2,18 @@ function getDefinitions(id) {
 
     $.getJSON("/api/getdefinitions.php?id="+id,function(data){
         $("#definitions").empty();
-        $("#definitions").append("<h2><a href='list.php?id="+data.id+"'>"+data.term+"<span class='glyphicon glyphicon-link'></span></a></h2>");
+        $("#definitions").append("<h2><a href='/term/"+encodeURIComponent(data.term)+"'>"+data.term+"<span class='glyphicon glyphicon-link'></span></a></h2>");
+        try {
+            var stateObj = {};
+            history.pushState(stateObj, data.term, "https://evelexicon.com/term/"+encodeURIComponent(data.term));
+        }
+        catch(err) { console.log("No pushstate");}
         $.each(data.definitions,function( index, value ) {
-            $("#definitions").append('<div class="term well row vertical-center">'+'<div class="termdisplay col-md-2"><div class="termUser"><a href="https://forums.eveonline.com/profile/'+value.username+'"><img src="https://image.eveonline.com/character/'+value.userid+'_32.jpg"><span class="hidden-xs">'+value.username+'</span></a></div></div><div class="termdisplay col-md-10"><div class="termDefinition">'+value.definition+'</div></div>');
+            reporttext='';
+            if (characterid){
+                reporttext="<div class='voteicons'><a href='/report.php?id="+value.id+"' alt='report'><span class='glyphicon glyphicon-bullhorn glyphgrey'></span></a></div>";
+            }
+            $("#definitions").append('<div class="term well row vertical-center">'+'<div class="termUser" col-md-2"><a href="https://forums.eveonline.com/profile/'+value.username+'"><img src="https://image.eveonline.com/character/'+value.userid+'_32.jpg"><span class="hidden-xs">'+value.username+'</span></a></div><div class="termdefinition col-md-10">'+value.definition+reporttext+'</div>');
         });
         $(".termDefinition").mouseup(function() {searchDefinition();});
     })

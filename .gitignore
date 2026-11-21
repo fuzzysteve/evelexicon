@@ -1,0 +1,13 @@
+composer.phar
+composer.lock
+vendor/
+templates_c/
+config/
+cache/
+
+
+# secrets / credentials (use the .example files as templates)
+includes/dbpost.inc.php
+includes/secret.php
+auth/secretreal.php
+auth/db.inc.php

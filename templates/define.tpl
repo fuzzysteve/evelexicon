@@ -1,4 +1,4 @@
-{extends file='layout.tpl' }
+{extends file='layout2.tpl' }
 {block name=title}{$termname}{/block}
 {block name=body}
         <div class="termTitle"><h1><a href="/define.php?id={$termid}">{$termname}</a><h1></div>

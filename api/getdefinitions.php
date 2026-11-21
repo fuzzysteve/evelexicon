@@ -9,7 +9,7 @@ $id=is_numeric($_GET['id'])?$_GET['id']:1;
 
 
 $termsql=<<<EOS
-SELECT definition,username,lexiconuser.userid,status
+SELECT lexicontermdefinition.id,definition,username,lexiconuser.userid,status
 FROM lexicontermdefinition
 JOIN lexiconuser ON lexicontermdefinition.userid=lexiconuser.userid
 WHERE lexicontermdefinition.lexiconterm=:term
@@ -40,7 +40,8 @@ while ($row=$todstmt->fetchObject()) {
     $terms[]=array(
         "definition"=>$row->definition,
         "username"=>$row->username,
-        "userid"=>$row->userid
+        "userid"=>$row->userid,
+        "id"=>$row->id
     );
 }
 echo json_encode(array("term"=>$term,"id"=>$id,"definitions"=>$terms), JSON_NUMERIC_CHECK);
